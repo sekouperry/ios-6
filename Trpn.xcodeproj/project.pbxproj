@@ -25,6 +25,9 @@
 		4E7F13DE16FBCB4500A4D31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F13DC16FBCB4500A4D31E /* InfoPlist.strings */; };
 		4E7F13E116FBCB4500A4D31E /* TrpnTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F13E016FBCB4500A4D31E /* TrpnTests.m */; };
 		4E7F13EB16FBCB5000A4D31E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F13EA16FBCB5000A4D31E /* Main.storyboard */; };
+		4E7F13EE16FBCD1B00A4D31E /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F13ED16FBCD1B00A4D31E /* HomeViewController.m */; };
+		4E7F13F216FBDA8C00A4D31E /* LocationInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F13F116FBDA8C00A4D31E /* LocationInputViewController.m */; };
+		4E7F13F516FBF6A700A4D31E /* AutoCompleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F13F416FBF6A700A4D31E /* AutoCompleteCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,12 @@
 		4E7F13DF16FBCB4500A4D31E /* TrpnTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrpnTests.h; sourceTree = "<group>"; };
 		4E7F13E016FBCB4500A4D31E /* TrpnTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrpnTests.m; sourceTree = "<group>"; };
 		4E7F13EA16FBCB5000A4D31E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4E7F13EC16FBCD1B00A4D31E /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = ViewControllers/HomeViewController.h; sourceTree = "<group>"; };
+		4E7F13ED16FBCD1B00A4D31E /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = ViewControllers/HomeViewController.m; sourceTree = "<group>"; };
+		4E7F13F016FBDA8C00A4D31E /* LocationInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationInputViewController.h; path = ViewControllers/LocationInputViewController.h; sourceTree = "<group>"; };
+		4E7F13F116FBDA8C00A4D31E /* LocationInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationInputViewController.m; path = ViewControllers/LocationInputViewController.m; sourceTree = "<group>"; };
+		4E7F13F316FBF6A700A4D31E /* AutoCompleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCompleteCell.h; sourceTree = "<group>"; };
+		4E7F13F416FBF6A700A4D31E /* AutoCompleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCompleteCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +100,10 @@
 		4E7F13A316FBCB4500A4D31E = {
 			isa = PBXGroup;
 			children = (
+				4E7F13F316FBF6A700A4D31E /* AutoCompleteCell.h */,
+				4E7F13F416FBF6A700A4D31E /* AutoCompleteCell.m */,
 				4E7F13EA16FBCB5000A4D31E /* Main.storyboard */,
+				4E7F13EF16FBCD2000A4D31E /* ViewControllers */,
 				4E7F13B716FBCB4500A4D31E /* Trpn */,
 				4E7F13D916FBCB4500A4D31E /* TrpnTests */,
 				4E7F13AE16FBCB4500A4D31E /* Frameworks */,
@@ -162,6 +174,17 @@
 				4E7F13DC16FBCB4500A4D31E /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4E7F13EF16FBCD2000A4D31E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				4E7F13EC16FBCD1B00A4D31E /* HomeViewController.h */,
+				4E7F13ED16FBCD1B00A4D31E /* HomeViewController.m */,
+				4E7F13F016FBDA8C00A4D31E /* LocationInputViewController.h */,
+				4E7F13F116FBDA8C00A4D31E /* LocationInputViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +300,9 @@
 				4E7F13BE16FBCB4500A4D31E /* main.m in Sources */,
 				4E7F13C216FBCB4500A4D31E /* AppDelegate.m in Sources */,
 				4E7F13CB16FBCB4500A4D31E /* Trpn.xcdatamodeld in Sources */,
+				4E7F13EE16FBCD1B00A4D31E /* HomeViewController.m in Sources */,
+				4E7F13F216FBDA8C00A4D31E /* LocationInputViewController.m in Sources */,
+				4E7F13F516FBF6A700A4D31E /* AutoCompleteCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
