@@ -28,6 +28,18 @@
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  [self.origin addTarget:self action:@selector(onEditingEnded:) forControlEvents:UIControlEventEditingDidEnd];
+  
+//  UITextField *origin = self.origin;
+//  UITextField *destination = self.destination;
+//  NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(origin, destination);
+//  float halfScreen = self.view.bounds.size.width / 2 - 30;
+//  NSString *layout = [NSString stringWithFormat:@"[origin(%f)]-[destination(==origin)]", halfScreen];
+//  NSArray *constraints = [NSLayoutConstraint constraintsWithVisualFormat:layout
+//                                                                 options:0
+//                                                                 metrics:nil
+//                                                                   views:viewsDictionary];
+//  [self.view addConstraints:constraints];
 }
 
 - (void)didReceiveMemoryWarning
@@ -39,9 +51,10 @@
 #pragma mark SearchBarDelegate
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString {
-  if(self.searchBar.text.length > 2) {
+  NSLog(@"OH OK IN SHOULD DO STUFF %@", searchString);
+  if(searchString.length > 3) {
     self.data = [NSMutableData data];
-    NSString *query = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)self.searchBar.text, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
+    NSString *query = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)searchString, NULL, CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
     // https://maps.googleapis.com/maps/api/place/autocomplete/json?input=San+Fran&key=AIzaSyAMbbvWwdvJLyxvynQVLPPdTzAFWjQXBCQ&sensor=false
     NSMutableString *url = [NSMutableString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/autocomplete/json?input=%@&sensor=false&key=AIzaSyAMbbvWwdvJLyxvynQVLPPdTzAFWjQXBCQ", query];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -57,19 +70,23 @@
   NSLog(@"YEAH DID HIDE THAT SHIT");
 }
 
+- (void)searchDisplayController:(UISearchDisplayController *)controller didLoadSearchResultsTableView:(UITableView *)tableView {
+  [tableView registerNib:[UINib nibWithNibName:@"LocationAutocompleteCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"LocationAutocompleteCell"];
+}
+
 
 
 
 #pragma mark UITableViewDatasource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  NSLog(@"CALLED thiS");
+  NSLog(@"CALLED thiS %d", self.suggestions.count);
   return self.suggestions.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSLog(@"GETTING CELL");
-  AutoCompleteCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"LocationAutocompleteCell"];
+  AutoCompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationAutocompleteCell"];
   if(!cell) {
     NSLog(@"NO CELL???!!!");
   }
@@ -98,4 +115,37 @@
   NSLog(@"wanting to reload table %d", self.suggestions.count);
 }
 
+- (IBAction)onTouchUpInsideLocationField:(id)sender {
+  self.originWidth.constant = 200.0;
+  self.destinationWidth.constant = 60;
+  [self.view setNeedsUpdateConstraints];
+  [UIView animateWithDuration:0.3 animations:^{
+    [self.view layoutIfNeeded];
+  }];
+}
+
+-(IBAction)onEditingEnded:(id)sender {
+  NSLog(@"EDITING ENDED");
+  self.originWidth.constant = 60;
+  self.destinationWidth.constant = 200;
+  [self.view setNeedsUpdateConstraints];
+  [UIView animateWithDuration:0.3 animations:^{
+    [self.view layoutIfNeeded];
+  }];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField*)textField {
+  NSLog(@"AHOY THERE");
+  NSInteger nextTag = textField.tag + 1;
+  // Try to find next responder
+  UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+  if (nextResponder) {
+    // Found next responder, so set it.
+    [nextResponder becomeFirstResponder];
+  } else {
+    // Not found, so remove keyboard.
+    [textField resignFirstResponder];
+  }
+  return NO; // We do not want UITextField to insert line-breaks.
+}
 @end

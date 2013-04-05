@@ -10,8 +10,10 @@
 
 @interface LocationInputViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate, NSURLConnectionDataDelegate>
 
-@property (nonatomic, retain) IBOutlet UITextField *textField;
-@property (nonatomic, retain) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) IBOutlet UITextField *origin;
+@property (nonatomic, retain) IBOutlet UITextField *destination;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *originWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *destinationWidth;
+- (IBAction)onTouchUpInsideLocationField:(id)sender;
 
 @end
